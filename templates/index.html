@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groupie Tracker</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>🎵 Groupie Tracker</h1>
+        <p>Découvrez vos artistes préférés</p>
+    </header>
+
+    <main>
+        <div class="artists-grid">
+            {{range .}}
+            <div class="artist-card">
+                <img src="{{.Image}}" alt="{{.Name}}">
+                <h2>{{.Name}}</h2>
+                <div class="info">
+                    <p><strong>Création :</strong> {{.CreationDate}}</p>
+                    <p><strong>Premier album :</strong> {{.FirstAlbum}}</p>
+                    <p><strong>Membres :</strong> {{len .Members}}</p>
+                </div>
+                <a href="/artist/{{.ID}}" class="btn">Voir détails</a>
+            </div>
+            {{end}}
+        </div>
+    </main>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
