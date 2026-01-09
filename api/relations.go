@@ -32,13 +32,13 @@ func GetRelationByID(id int) (RelationData, error) {
 		}
 	}
 
-	return RelationData{}, fmt.Errorf("relation pour l'artiste ID %d non trouvée", id)
+	return RelationData{}, fmt.Errorf("les relations pour l'artiste ID %d n'ont pas été trouvée", id)
 }
 
 func CountTotalConcerts(relation RelationData) int {
 	total := 0
-	for _, dates := range relation.DatesLocations {
-		total += len(dates)
+	for _, dates := range relation.DatesLocations {       //"_" permet d'ogniner la clef de la map et de ne parcourir que les valeurs
+		total += len(dates)								  //donc on ne prend en compte que les dates et pas les lieux
 	}
 	return total
 }

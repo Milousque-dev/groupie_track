@@ -6,8 +6,8 @@ import (
 )
 
 func GetAllArtists() ([]Artist, error) {
-	var artists []Artist
-	err := fetchJSON(ARTISTS_URL, &artists)
+	var artists []Artist							
+	err := fetchJSON(ARTISTS_URL, &artists)	
 	if err != nil {
 		return nil, err
 	}
@@ -26,7 +26,7 @@ func GetArtistByID(id int) (*Artist, error) {
 		}
 	}
 
-	return nil, fmt.Errorf("artiste avec l'ID %d non trouvé", id)
+	return nil, fmt.Errorf("l'artiste avec l'ID %d n'a pas été trouvé", id)
 }
 
 func GetArtistByName(name string) (*Artist, error) {
@@ -41,5 +41,5 @@ func GetArtistByName(name string) (*Artist, error) {
 		}
 	}
 
-	return nil, fmt.Errorf("artiste '%s' non trouvé", name)
+	return nil, fmt.Errorf("l'artiste '%s' n'a pas été trouvé", name)
 }

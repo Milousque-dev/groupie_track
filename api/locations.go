@@ -32,5 +32,5 @@ func GetLocationByID(id int) (LocationData, error) {
 		}
 	}
 
-	return LocationData{}, fmt.Errorf("locations pour l'artiste ID %d non trouvées", id)
+	return LocationData{}, fmt.Errorf("les localisations de l'artiste ID %d n'ont pas été trouvées", id)
 }

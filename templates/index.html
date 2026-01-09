@@ -7,28 +7,99 @@
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-    <header>
-        <h1>🎵 Groupie Tracker</h1>
-        <p>Découvrez vos artistes préférés</p>
-    </header>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">Groupie Tracker</h1>
+            <p class="subtitle">Artistes et concerts</p>
+        </header>
 
-    <main>
-        <div class="artists-grid">
-            {{range .}}
-            <div class="artist-card">
-                <img src="{{.Image}}" alt="{{.Name}}">
-                <h2>{{.Name}}</h2>
-                <div class="info">
-                    <p><strong>Création :</strong> {{.CreationDate}}</p>
-                    <p><strong>Premier album :</strong> {{.FirstAlbum}}</p>
-                    <p><strong>Membres :</strong> {{len .Members}}</p>
-                </div>
-                <a href="/artist/{{.ID}}" class="btn">Voir détails</a>
-            </div>
-            {{end}}
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Rechercher..." autocomplete="off">
+            <div id="suggestions" class="suggestions"></div>
         </div>
-    </main>
 
+        <div class="filters-container">
+            <form method="GET" action="/">
+                <h2 class="filters-title">Filtres</h2>
+                <div class="filters-grid">
+                    <div>
+                        <label class="filter-label">Année création</label>
+                        <div class="filter-range">
+                            <input type="number" name="creation_min" placeholder="Min" class="filter-input">
+                            <span class="range-separator">-</span>
+                            <input type="number" name="creation_max" placeholder="Max" class="filter-input">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="filter-label">Membres</label>
+                        <div class="filter-checkboxes">
+                            <label class="checkbox-label"><input type="checkbox" name="members" value="1"> 1</label>
+                            <label class="checkbox-label"><input type="checkbox" name="members" value="2"> 2</label>
+                            <label class="checkbox-label"><input type="checkbox" name="members" value="3"> 3</label>
+                            <label class="checkbox-label"><input type="checkbox" name="members" value="4"> 4</label>
+                            <label class="checkbox-label"><input type="checkbox" name="members" value="5"> 5+</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-buttons">
+                    <button type="submit" class="btn btn-primary">Filtrer</button>
+                    <a href="/" class="btn btn-secondary">Réinitialiser</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="artists-grid">
+            {{ if .Artists }}
+                {{ range .Artists }}
+                <a href="/artist/{{ .ID }}" class="artist-card">
+                    <div class="artist-image-container">
+                        <img src="{{ .Image }}" alt="{{ .Name }}" class="artist-image">
+                    </div>
+                    <div class="artist-info">
+                        <h3 class="artist-name">{{ .Name }}</h3>
+                        <div class="artist-details">
+                            <p class="artist-detail">{{ len .Members }} membres</p>
+                            <p class="artist-detail">Créé en {{ .CreationDate }}</p>
+                        </div>
+                    </div>
+                </a>
+                {{ end }}
+            {{ else }}
+                <div class="no-results">
+                    <p>Aucun résultat.</p>
+                    <a href="/" class="btn btn-primary">Retour</a>
+                </div>
+            {{ end }}
+        </div>
+    </div>
+
+    <script>
+        const artists = [
+            {{ range .Artists }}
+            {
+                id: {{ .ID }},
+                name: "{{ .Name }}",
+                members: {{ printf "%q" .Members }},
+                creationDate: {{ .CreationDate }}
+            },
+            {{ end }}
+        ];
+
+        const relations = [
+            {{ range .Relations }}
+            {
+                id: {{ .ID }},
+                locations: [
+                    {{ range $location, $dates := .DatesLocations }}
+                    "{{ $location }}",
+                    {{ end }}
+                ]
+            },
+            {{ end }}
+        ];
+    </script>
     <script src="/static/js/main.js"></script>
 </body>
 </html>

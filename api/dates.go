@@ -32,5 +32,5 @@ func GetDateByID(id int) (DateData, error) {
 		}
 	}
 
-	return DateData{}, fmt.Errorf("dates pour l'artiste ID %d non trouvées", id)
+	return DateData{}, fmt.Errorf("les dates pour l'artiste ID %d n'ont pas été trouvées", id)
 }

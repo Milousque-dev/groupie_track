@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Artist.Name }}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-button">Retour</a>
+
+        <div class="artist-detail-container">
+            <img src="{{ .Artist.Image }}" alt="{{ .Artist.Name }}" class="artist-detail-image">
+
+            <div>
+                <h1 class="artist-detail-name">{{ .Artist.Name }}</h1>
+
+                <div class="artist-info-grid">
+                    <div class="info-card">
+                        <p class="info-label">Création</p>
+                        <p class="info-value">{{ .Artist.CreationDate }}</p>
+                    </div>
+
+                    <div class="info-card">
+                        <p class="info-label">Premier album</p>
+                        <p class="info-value">{{ .Artist.FirstAlbum }}</p>
+                    </div>
+
+                    <div class="info-card">
+                        <p class="info-label">Membres</p>
+                        <p class="info-value">{{ len .Artist.Members }}</p>
+                    </div>
+
+                    <div class="info-card">
+                        <p class="info-label">Concerts</p>
+                        <p class="info-value">{{ len .Relation.DatesLocations }}</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="section-title">Membres</h2>
+                    <div class="members-list">
+                        {{ range .Artist.Members }}
+                        <div class="member-tag">{{ . }}</div>
+                        {{ end }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="concerts-section">
+            <h2 class="section-title">Concerts</h2>
+            {{ if .Relation.DatesLocations }}
+            <div class="concerts-grid">
+                {{ range $location, $dates := .Relation.DatesLocations }}
+                <div class="concert-card">
+                    <h3 class="location-name">{{ $location }}</h3>
+                    <div class="concert-dates">
+                        {{ range $dates }}
+                        <span class="date-tag">{{ . }}</span>
+                        {{ end }}
+                    </div>
+                </div>
+                {{ end }}
+            </div>
+            {{ else }}
+            <p>Aucun concert.</p>
+            {{ end }}
+        </div>
+    </div>
+</body>
+</html>

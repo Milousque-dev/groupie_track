@@ -5,78 +5,311 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: #1a1a2e;
+    color: #f0f0f5;
     padding: 20px;
 }
 
-header {
-    text-align: center;
-    color: white;
-    margin-bottom: 40px;
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-header h1 {
-    font-size: 3em;
+.header {
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 2rem;
+    color: #6c63ff;
+}
+
+.search-container {
+    max-width: 600px;
+    margin: 0 auto 20px;
+    position: relative;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    background: #252541;
+    border: 1px solid #3a3a52;
+    border-radius: 5px;
+    color: #f0f0f5;
+}
+
+.suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #252541;
+    border: 1px solid #3a3a52;
+    margin-top: 5px;
+    max-height: 300px;
+    overflow-y: auto;
+    display: none;
+}
+
+.suggestions.active {
+    display: block;
+}
+
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #3a3a52;
+}
+
+.suggestion-item:hover {
+    background: #2d2d4a;
+}
+
+.suggestion-type {
+    background: #6c63ff;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    margin-right: 5px;
+}
+
+.filters-container {
+    background: #252541;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.filters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
     margin-bottom: 10px;
+}
+
+.filter-label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.filter-input {
+    width: 100%;
+    padding: 5px;
+    background: #1a1a2e;
+    border: 1px solid #3a3a52;
+    color: #f0f0f5;
+}
+
+.filter-range {
+    display: flex;
+    gap: 5px;
+}
+
+.filter-checkboxes {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.checkbox-label {
+    cursor: pointer;
+}
+
+.filter-buttons {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.btn {
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.btn-primary {
+    background: #6c63ff;
+    color: white;
+}
+
+.btn-secondary {
+    background: #252541;
+    color: #f0f0f5;
 }
 
 .artists-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 30px;
-    max-width: 1400px;
-    margin: 0 auto;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
 }
 
 .artist-card {
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s, box-shadow 0.3s;
+    background: #252541;
+    text-decoration: none;
+    color: inherit;
 }
 
 .artist-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    background: #2d2d4a;
 }
 
-.artist-card img {
+.artist-image {
     width: 100%;
-    height: 280px;
+    height: 250px;
     object-fit: cover;
 }
 
-.artist-card h2 {
-    padding: 15px;
-    font-size: 1.5em;
-    color: #333;
+.artist-info {
+    padding: 10px;
+}
+
+.artist-name {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.artist-detail {
+    font-size: 0.9rem;
+    color: #b0b0c3;
+}
+
+.no-results {
     text-align: center;
+    padding: 40px;
 }
 
-.artist-card .info {
-    padding: 0 15px 15px;
-    color: #666;
-}
-
-.artist-card .info p {
-    margin: 8px 0;
-}
-
-.btn {
-    display: block;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+.back-button {
+    display: inline-block;
+    padding: 8px 15px;
+    background: #252541;
+    color: #f0f0f5;
     text-decoration: none;
-    padding: 12px;
-    text-align: center;
-    margin: 15px;
-    border-radius: 8px;
-    transition: opacity 0.3s;
+    margin-bottom: 10px;
 }
 
-.btn:hover {
-    opacity: 0.9;
+.artist-detail-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+    background: #252541;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.artist-detail-image {
+    width: 100%;
+}
+
+.artist-detail-name {
+    font-size: 2rem;
+    color: #6c63ff;
+    margin-bottom: 10px;
+}
+
+.artist-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.info-card {
+    background: #1a1a2e;
+    padding: 10px;
+}
+
+.info-label {
+    color: #b0b0c3;
+    font-size: 0.85rem;
+}
+
+.section-title {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.members-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.member-tag {
+    background: #6c63ff;
+    color: white;
+    padding: 5px 10px;
+}
+
+.concerts-section {
+    background: #252541;
+    padding: 20px;
+}
+
+.concerts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.concert-card {
+    background: #1a1a2e;
+    padding: 10px;
+}
+
+.location-name {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.concert-dates {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.date-tag {
+    background: #252541;
+    padding: 3px 6px;
+    font-size: 0.85rem;
+}
+
+.error-container {
+    text-align: center;
+    padding: 40px;
+}
+
+.error-code {
+    font-size: 4rem;
+    color: #6c63ff;
+}
+
+.error-title {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+.error-message {
+    color: #b0b0c3;
+    margin-bottom: 20px;
+}
+
+.error-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .artist-detail-container {
+        grid-template-columns: 1fr;
+    }
+    .artist-info-grid {
+        grid-template-columns: 1fr;
+    }
 }

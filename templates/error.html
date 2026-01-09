@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erreur {{ .Code }}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="error-container">
+            <div class="error-code">{{ .Code }}</div>
+
+            <h1 class="error-title">
+                {{ if eq .Code 404 }}
+                    Page non trouvée
+                {{ else if eq .Code 500 }}
+                    Erreur du serveur
+                {{ else if eq .Code 400 }}
+                    Requête invalide
+                {{ else }}
+                    Erreur
+                {{ end }}
+            </h1>
+
+            <p class="error-message">{{ .Message }}</p>
+
+            <div class="error-buttons">
+                <a href="/" class="btn btn-primary">Accueil</a>
+                <a href="javascript:history.back()" class="btn btn-secondary">Retour</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
